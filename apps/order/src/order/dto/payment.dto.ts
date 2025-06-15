@@ -25,6 +25,7 @@ export class PaymentDto {
   @IsString()
   @IsNotEmpty()
   birthOrRegistration: string;
+
   @IsString()
   @IsNotEmpty()
   passwordTwoDigits: string;
