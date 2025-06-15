@@ -10,12 +10,13 @@ export class ProductService {
     private readonly productRepository: Repository<Product>,
   ) {}
 
-  async getProductsInfo(productIds: string[]) {
+  async getProductsInfo(productsIds: string[]) {
     const products = await this.productRepository.find({
       where: {
-        id: In(productIds),
+        id: In(productsIds),
       },
     });
+    console.log('products', products);
 
     return products;
   }

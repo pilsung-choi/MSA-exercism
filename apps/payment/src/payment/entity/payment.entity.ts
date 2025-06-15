@@ -1,4 +1,3 @@
-import { PaymentMethod } from 'apps/order/src/order/entity/payment.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 export enum PaymentStatus {
@@ -7,7 +6,7 @@ export enum PaymentStatus {
   approved = 'Approved',
 }
 
-export enum paymentMethod {
+export enum PaymentMethod {
   creditCard = 'CreditCard',
   kakao = 'Kakao',
 }
@@ -32,10 +31,10 @@ export class Payment {
     enum: PaymentMethod,
     default: PaymentMethod.creditCard,
   })
-  paymentMethod: number;
+  paymentMethod: PaymentMethod;
 
   @Column()
-  cardNumber: number;
+  cardNumber: string;
 
   @Column()
   expiryYear: string;
@@ -44,7 +43,7 @@ export class Payment {
   expiryMonth: string;
 
   @Column()
-  birthOrRegistraion: string;
+  birthOrRegistration: string;
 
   @Column()
   passwordTwoDigits: string;

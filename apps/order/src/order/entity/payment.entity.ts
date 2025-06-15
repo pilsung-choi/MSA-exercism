@@ -14,7 +14,7 @@ export class Payment {
 
   @Prop({
     enum: PaymentMethod,
-    default: Payment,
+    default: PaymentMethod.creditCard,
   })
   paymentMethod: PaymentMethod;
 

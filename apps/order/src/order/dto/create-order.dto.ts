@@ -7,7 +7,7 @@ export class CreateOrderDto {
   @IsArray()
   @IsString({ each: true })
   @IsNotEmpty({ each: true })
-  productId: string[];
+  productIds: string[];
 
   @ValidateNested()
   @Type(() => AddressDto)
