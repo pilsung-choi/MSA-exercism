@@ -27,11 +27,11 @@ export class OrderService {
     private readonly orderModel: Model<Order>,
   ) {}
 
-  async createOrder(createOrderDto: CreateOrderDto, token: string) {
-    const { productIds, address, payment } = createOrderDto;
+  async createOrder(createOrderDto: CreateOrderDto) {
+    const { productIds, address, payment, meta } = createOrderDto;
 
     // 1) 사용자 정보 가져오기
-    const user = await this.getUserFromToken(token);
+    const user = await this.getUserFromToken(meta.user.sub);
 
     // 2) 상품 정보 가져오기
     const products = await this.getProductsByIds(productIds);
@@ -59,18 +59,18 @@ export class OrderService {
     return this.orderModel.findById(order._id);
   }
 
-  private async getUserFromToken(token: string) {
+  private async getUserFromToken(userId: string) {
     // 1) User MS : JWT 토큰 검증
-    const tokenRes = await lastValueFrom(
-      this.userService.send({ cmd: 'parse_bearer_token' }, { token }),
-    );
+    // const tokenRes = await lastValueFrom(
+    //   this.userService.send({ cmd: 'parse_bearer_token' }, { token }),
+    // );
 
-    if (tokenRes.status === 'error') {
-      throw new PaymentCancelledException(tokenRes);
-    }
+    // if (tokenRes.status === 'error') {
+    //   throw new PaymentCancelledException(tokenRes);
+    // }
 
-    // 2) User MS : 사용자 정보 가져오기
-    const userId = tokenRes?.data?.sub;
+    // // 2) User MS : 사용자 정보 가져오기
+    // const userId = tokenRes?.data?.sub;
     const userRes = await lastValueFrom(
       this.userService.send({ cmd: 'get_user_info' }, { userId }),
     );
@@ -175,7 +175,7 @@ export class OrderService {
     }
   }
 
-  changeOrderStatus(orderId: string, statis: OrderStatus) {
+  changeOrderStatus(orderId: string, status: OrderStatus) {
     return this.orderModel.findByIdAndUpdate(orderId, { status });
   }
 }

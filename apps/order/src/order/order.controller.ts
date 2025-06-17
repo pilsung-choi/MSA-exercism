@@ -8,7 +8,6 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { OrderService } from './order.service';
-import { Authorization } from 'apps/gateway/src/auth/decorator/authorization.decorator';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { EventPattern, MessagePattern, Payload } from '@nestjs/microservices';
 import { RpcInterceptor } from '@app/common';
@@ -36,5 +35,10 @@ export class OrderController {
       payload.id,
       OrderStatus.deliveryStarted,
     );
+  }
+
+  @MessagePattern({ cmd: 'create_order' })
+  async createOrder(@Payload() createOrderDto: CreateOrderDto) {
+    return this.orderService.createOrder(createOrderDto);
   }
 }
