@@ -16,7 +16,6 @@ export class ProductService {
         id: In(productsIds),
       },
     });
-    console.log('products', products);
 
     return products;
   }

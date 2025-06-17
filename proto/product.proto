@@ -1,0 +1,32 @@
+syntax = "proto3"
+
+package product
+
+service ProductService{
+    rpc CreateSample(CreateSampleRequest) returns (CreateSampleResponse);
+    rpc GetProductInfo(GetProductInfoRequest) returns (GetProductInfoResponse);
+}
+
+message CreateSampleRequest {
+
+}
+
+message CreateSampleResponse {
+    bool success = 1;
+}
+
+message GetProductInfoRequest {
+    repeated string productIds = 1;
+}
+
+message GetProductInfoResponse {
+    message ProductInfo {
+        string id = 1;
+        string name = 2;
+        string description = 3;
+        float price = 4;
+        uint32 stock = 5;
+    }
+
+    repeated ProductInfo products = 1;
+}

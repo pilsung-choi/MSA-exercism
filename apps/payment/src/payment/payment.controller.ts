@@ -18,7 +18,6 @@ export class PaymentController {
   @UsePipes(ValidationPipe)
   @UseInterceptors(RpcInterceptor)
   makePayment(@Payload() payload: MakePaymentDto) {
-    console.log('make_payment');
     return this.paymentService.makePayment(payload);
   }
 }
