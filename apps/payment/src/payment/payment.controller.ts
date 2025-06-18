@@ -13,6 +13,7 @@ import { PaymentMicroservice } from '@app/common';
 import { PaymentMethod } from './entity/payment.entity';
 
 @Controller()
+@PaymentMicroservice.PaymentServiceControllerMethods()
 export class PaymentController
   implements PaymentMicroservice.PaymentServiceController
 {

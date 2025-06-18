@@ -12,6 +12,7 @@ import { GetUserInfoDto } from './dto/get-user-info.dto';
 import { UserMicroservice } from '@app/common';
 
 @Controller()
+@UserMicroservice.UserServiceControllerMethods()
 export class UserController implements UserMicroservice.UserServiceController {
   constructor(private readonly userService: UserService) {}
 
