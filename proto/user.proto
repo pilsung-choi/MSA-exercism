@@ -13,7 +13,7 @@ message ParseBearerTokenRequest {
 }
 
 message ParseBearerTokenResponse {
-    string sub = 1
+    string sub = 1;
 }
 
 message RegisterUserRequest {
@@ -24,8 +24,8 @@ message RegisterUserRequest {
 }
 
 message RegisterUserRespose {
-    string id = 1
-    string token = 2;
+    string id = 1;
+    string email = 2;
     string name = 3;
     int32 age = 4;
     string profile = 5;
@@ -40,7 +40,7 @@ message LoginUserResponse {
     string accessToken = 2;
 }
 
-service AuthService {
+service UserService {
     rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse);
 }
 
@@ -49,7 +49,7 @@ message GetUserInfoRequest {
 }
 
 message GetUserInfoResponse {
-    string id = 1
+    string id = 1;
     string email = 2;
     string name = 3;
     int32 age = 4;

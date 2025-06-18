@@ -1,6 +1,6 @@
-syntax = "proto3"
+syntax = "proto3";
 
-package product
+package product;
 
 service ProductService{
     rpc CreateSample(CreateSampleRequest) returns (CreateSampleResponse);

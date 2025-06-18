@@ -1,18 +1,18 @@
-syntax = "proto3"
+syntax = "proto3";
 
-package order
+package order;
 
-service OrderService{
-    rpc Deliverystarted(DeliverystartedRequest) returns (DeliverystartedResponse);
+service OrderService {
+    rpc DeliveryStarted(DeliveryStartedRequest) returns (DeliveryStartedResponse);
     rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
 }
 
-message DeliverystartedRequest {
+message DeliveryStartedRequest {
     string id = 1;
 }
 
-message DeliverystartedResponse {
-    
+message DeliveryStartedResponse {
+
 }
 
 message CreateOrderRequest {
@@ -36,14 +36,14 @@ message CreateOrderRequest {
         string paymentMethod = 1;
         string paymentName = 2;
         string cardNumber = 3;
-        string expiryMonth = 4;
-        string expiryYear = 5;
+        string expiryYear = 4;
+        string expiryMonth = 5;
         string birthOrRegistration = 6;
         string passwordTwoDigits = 7;
         double amount = 8;
     }
 
-    Meta mata = 1;
+    Meta meta = 1;
     repeated string productIds = 2;
     Address address = 3;
     Payment payment = 4;

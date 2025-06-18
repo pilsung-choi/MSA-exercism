@@ -1,6 +1,6 @@
-syntax = "proto3"
+syntax = "proto3";
 
-package payment
+package payment;
 
 service PaymentService{
     rpc MakePayment(MakePaymentRequest) returns (MakePaymentResponse);
