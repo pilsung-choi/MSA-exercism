@@ -1,4 +1,5 @@
 import {
+  constructMetadata,
   ORDER_SERVICE,
   OrderMicroservice,
   UserMeta,
@@ -29,11 +30,14 @@ export class OrderService implements OnModuleInit {
     createOrderDto: CreateOrderDto,
     userPayload: UserPayloadDto,
   ) {
-    return this.orderService.createOrder({
-      ...createOrderDto,
-      meta: {
-        user: userPayload,
+    return this.orderService.createOrder(
+      {
+        ...createOrderDto,
+        meta: {
+          user: userPayload,
+        },
       },
-    });
+      constructMetadata(OrderService.name, 'createOrder'),
+    );
   }
 }

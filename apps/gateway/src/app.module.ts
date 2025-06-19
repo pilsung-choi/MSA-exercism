@@ -15,6 +15,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { BearerTokenMiddleware } from './auth/middleware/bearer-token.middleware';
 import { join } from 'path';
+import { traceInterceptor } from '@app/common/grpc/interceptor';
 
 @Module({
   imports: [
@@ -36,6 +37,9 @@ import { join } from 'path';
           useFactory: (configService: ConfigService) => ({
             transport: Transport.GRPC,
             options: {
+              channelOptions: {
+                interceptors: [traceInterceptor('Gateway')],
+              },
               package: UserMicroservice.protobufPackage,
               protoPath: join(process.cwd(), 'proto/user.proto'),
               url: configService.getOrThrow('USER_GRPC_URL'),
@@ -48,6 +52,9 @@ import { join } from 'path';
           useFactory: (configService: ConfigService) => ({
             transport: Transport.GRPC,
             options: {
+              channelOptions: {
+                interceptors: [traceInterceptor('Gateway')],
+              },
               package: ProductMicroservice.protobufPackage,
               protoPath: join(process.cwd(), 'proto/product.proto'),
               url: configService.getOrThrow('PRODUCT_GRPC_URL'),
@@ -60,6 +67,9 @@ import { join } from 'path';
           useFactory: (configService: ConfigService) => ({
             transport: Transport.GRPC,
             options: {
+              channelOptions: {
+                interceptors: [traceInterceptor('Gateway')],
+              },
               package: OrderMicroservice.protobufPackage,
               protoPath: join(process.cwd(), 'proto/order.proto'),
               url: configService.getOrThrow('ORDER_GRPC_URL'),
